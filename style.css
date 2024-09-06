@@ -1,3 +1,51 @@
 body{
-    background-color: lightgoldenrodyellow;
+    background-color:teal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+}
+
+.game-board{
+    border-radius: 30px;
+    background-color:#232323;
+    width: 95vh;
+    height: 85vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cardBorder{
+    border-radius: 25px;
+    border: 4px solid #E41A24;
+    background-color:aliceblue;
+
+    width: 15vh;
+    height: 22vh;
+    margin: 5px 5px 5px 5px;
+
+    z-index: 4;
+    cursor: pointer;
+    
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cardContent{
+    height: 10vh;
+    object-fit: cover;
+}
+
+h1{
+    font-family: "Pangolin", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 5vh;
+    color: azure;
 }
