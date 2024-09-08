@@ -1,10 +1,8 @@
 
-//Global variables
+////////////////////////////////
+// Global Variables For Game Logic
 let firstCard = '';
 let secondCard = '';
-let firstCardID = '';
-let secondCardID = '';
-
 let totalPairs = 0;
 let matchedPairs = 0;
 
@@ -12,18 +10,22 @@ let matchedPairs = 0;
 let gameBoard = document.querySelector('.game-board')
 
 //array of images
-let images = ['duck.png', 'glasses.png']
+let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png']
 
 //duplicate the array to create pairs
 let cardImages = images.concat(images)
 
+let winnerScreen = document.querySelector('.winner');
+
+
+
+////////////////////////////////
+// Functions For Game Logic 
 
         //reset variables function
         resetCards = () => {
-
             firstCard = ''
             secondCard = ''
-
         }
 
         //check for a win function
@@ -32,11 +34,52 @@ let cardImages = images.concat(images)
             console.log(`matched pairs: ${matchedPairs}`)
 
             if(totalPairs === matchedPairs){
+                winnerScreen.style.opacity = 1;
                 console.log("YOU WIN!")
-            }
-            
 
+                setTimeout(() => {
+                    winnerScreen.style.opacity = 0;
+                }, 2000);
+
+            }
         }
+
+        const compareCards = (firstCard, secondCard) => {
+            //Compare firstCard and secondCard
+            if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
+                // It's a match!
+                console.log("IT's A MATCHHHH!!!")
+
+                //increase the number of matchedPairs
+                matchedPairs++;
+
+                // Reset first and second cards after a match
+                resetCards();
+
+                //After every successful match, check if all pairs have been found
+                checkForWin(totalPairs, matchedPairs)
+
+            } else {
+                console.log("cards are not matching");
+                // If they don’t match: flip both cards back down after 1 sec
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+
+                    // Reset first and second cards after the flip
+                    resetCards();
+                }, 1000); // 1 second delay
+            }
+        }
+
+        //Shuffle the array using sort with a random comparison function
+        cardImages.sort(() => Math.random() - 0.5);
+
+
+
+
+     ////////////////////////////////
+    // Event Listners For Game Logic 
 
 // a loop to spread the cards on the game board
 for (let i = 0; i < cardImages.length; i++) {
@@ -83,70 +126,26 @@ for (let i = 0; i < cardImages.length; i++) {
         //store the whole card
         let clickedCard = cardContainer;
 
-         //get the card identifier
-        //  let clickedCardID = clickedCard.getAttribute('data-image')
-        //  console.log(`image is ${clickedCardID}`)
-
-
         //If firstCard is not set, set it to the clicked card
         if (firstCard == ''){
             //assign the first card
             firstCard = clickedCard
-            console.log(`first card: ${firstCard.getAttribute('data-image')}`)
 
         }else{
+
             //If firstCard is set, set secondCard to the clicked card
             secondCard = clickedCard
-            console.log(`second card: ${secondCard.getAttribute('data-image')}`)
 
-
-            //Compare firstCard and secondCard
-            if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
-                // It's a match!
-                console.log("IT's A MATCHHHH!!!")
-
-                //increase the number of matchedPairs
-                matchedPairs++;
-
-                // Reset first and second cards after a match
-                resetCards();
-
-                //check for a win
-                checkForWin(totalPairs, matchedPairs)
-
-            } else {
-                console.log("cards are not matching");
-                // If they don’t match: flip both cards back down after 1 sec
-                setTimeout(() => {
-                    firstCard.classList.remove('flipped');
-                    secondCard.classList.remove('flipped');
-
-                    // Reset first and second cards after the flip
-                    resetCards();
-                }, 1000); // 1 second delay
-            }
-            
-
+            //both cards set, compare them
+            compareCards(firstCard, secondCard)
         }
-
-
-
-
     });
 }
 
 
-
-//randomize the positions of the cards
-
-
-//Loop through the randomized array + assign each image to a card element on the grid
-
-
-
 //Keep score based on the number of moves or time taken
 
-//After every successful match, check if all pairs have been found.
+
 
 //If all pairs are matched, display a successful message
 
@@ -155,11 +154,4 @@ for (let i = 0; i < cardImages.length; i++) {
 //Reset all variables 
 //or a cancel this function and navigate to the next level
 
-
-
-
-//functions
-
-
-//event listners
 

@@ -10,8 +10,9 @@ body{
 .game-board{
     border-radius: 30px;
     background-color:#232323;
-    width: 95vh;
+    width: 89vh;
     height: 85vh;
+
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -61,7 +62,7 @@ body{
     position: relative;
     width: 15vh;
     height: 22vh;
-    margin: 5px 5px 5px 5px;
+    margin: 20px;
 }
 
 h1{
@@ -80,3 +81,20 @@ h1{
 .flipped .cardFront {
     transform: rotateY(0deg);
 }
+
+
+.winner {
+    position: absolute;
+    padding: 6vh;
+    left: 50%;
+    top: 50%;
+    translate: (-50, -50);
+
+    border-radius: 35px;
+    background-color: #111;
+    text-align: center;
+
+    z-index: 10;
+    opacity: 1;
+    transition: all 250ms ease;
+  }
