@@ -68,6 +68,10 @@ body{
     margin: 20px;
 }
 
+.card-container.disabled {
+    pointer-events: none; /* Disable mouse events */
+}
+
 h1, #timer{
     font-family: "Pangolin", cursive;
     font-weight: 400;

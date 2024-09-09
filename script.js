@@ -6,26 +6,17 @@ let secondCard = '';
 let totalPairs = 0;
 let matchedPairs = 0;
 let win = false;
-
-
-//select the game board
-let gameBoard = document.querySelector('.game-board');
-
-//array of images
 let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png'];
 
-
-//duplicate the array to create pairs
-let cardImages = images.concat(images);
-
-
 //query selectors
+let gameBoard = document.querySelector('.game-board');
 let winnerScreen = document.querySelector('.winner');
 let losingScreen = document.querySelector('.loser');
 const resetButton = document.querySelector('#resetButton');
 let timerDisplay = document.querySelector('#timer');
 
-
+//duplicate the array to create pairs
+let cardImages = images.concat(images);
 
 
 ////////////////////////////////
@@ -37,7 +28,7 @@ let timerDisplay = document.querySelector('#timer');
             secondCard = ''
         }
 
-        //check for a win function
+        //check for a win 
         const checkForWin = (totalPairs, matchedPairs) => {
             console.log(`total pairs: ${totalPairs}`)
             console.log(`matched pairs: ${matchedPairs}`)
@@ -51,9 +42,21 @@ let timerDisplay = document.querySelector('#timer');
                 win = true
             }
         }
+        
+        const disableCardsClicking = (status) => {
+            if(status === 'add'){
+                // Disable clicking on all cards
+                document.querySelectorAll('.card-container').forEach(card => card.classList.add('disabled'));
+            }else{
+                document.querySelectorAll('.card-container').forEach(card => card.classList.remove('disabled'));
+            }
+        }
 
-        //function to compare both cards, to check if they match or not
+        //compare both cards, to check if they match or not
         const compareCards = (firstCard, secondCard) => {
+            // Disable clicking on all cards
+            disableCardsClicking('add')
+
             //Compare firstCard and secondCard
             if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
                 
@@ -63,11 +66,16 @@ let timerDisplay = document.querySelector('#timer');
                 // Reset first and second cards after a match
                 resetCards();
 
+                // Re-enable clicking on all cards
+                disableCardsClicking('remove')
+
+
                 //After every successful match, check if all pairs have been found
                 checkForWin(totalPairs, matchedPairs);
 
             } else {
                 console.log("cards are not matching");
+
                 // If they don’t match: flip both cards back down after 1 sec
                 setTimeout(() => {
                     firstCard.classList.remove('flipped');
@@ -75,11 +83,14 @@ let timerDisplay = document.querySelector('#timer');
 
                     // Reset first and second cards after the flip
                     resetCards();
+
+                    // Re-enable clicking on all cards
+                    disableCardsClicking('remove')
                 }, 1000); // 1 second delay
             }
         }
 
-        //function to countdown to handle losing logic
+        //countdown to handle losing cases
         const startTimer = ()=>{
             let time = 90;
             const timer = setInterval(() => {
@@ -95,7 +106,7 @@ let timerDisplay = document.querySelector('#timer');
                     losingScreen.style.opacity = 1;
                 }
 
-                //disable the timer incase the user wins
+                //disable the timer in case the user wins
                 if(win){
                     clearInterval(timer);
                 }
@@ -121,6 +132,7 @@ const initializeGame = () => {
 
     // Create cards and add them to the game board
     for (let i = 0; i < cardImages.length; i++) {
+
         // Card container that holds the front/back sides of the card
         const cardContainer = document.createElement('div');
         cardContainer.setAttribute('class', 'card-container');
@@ -182,7 +194,6 @@ const initializeGame = () => {
 
 //reset the global variables
 resetButton.addEventListener('click', () => {
-
     //Recall the game function
     initializeGame();
 })
