@@ -6,7 +6,7 @@ let secondCard = '';
 let totalPairs = 0;
 let matchedPairs = 0;
 let win = false;
-let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png'];
+let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png', 'mic.png', 'brain.png', 'headphone.png', 'malware.png'];
 
 //query selectors
 let gameBoard = document.querySelector('.game-board');
@@ -53,19 +53,13 @@ let cardImages = images.concat(images);
         }
 
         //compare both cards, to check if they match or not
-        const compareCards = (firstCard, secondCard, imageToBeDisabled) => {
-
+        const compareCards = (firstCard, secondCard) => {
             // Disable clicking on all cards
             disableCardsClicking('add')
 
             //Compare firstCard and secondCard
             if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
                 
-                //remove the event listners for these cards
-                firstCard.style.pointerEvents = 'none';
-                secondCard.style.pointerEvents = 'none';
-
-
                 //increase the number of matchedPairs
                 matchedPairs++;
 
@@ -98,7 +92,7 @@ let cardImages = images.concat(images);
 
         //countdown to handle losing cases
         const startTimer = ()=>{
-            let time = 90;
+            let time = 60;
             const timer = setInterval(() => {
                 time--;
                 timerDisplay.innerHTML = `timer: ${time} seconds`
@@ -132,8 +126,6 @@ const initializeGame = () => {
 
     // Shuffle the card images
     cardImages.sort(() => Math.random() - 0.5);
-
-    console.log(cardImages)
 
     // Assign the number of pairs to the variable
     totalPairs = cardImages.length / 2;
@@ -178,8 +170,7 @@ const initializeGame = () => {
                 firstCard = clickedCard;
             } else {
                 secondCard = clickedCard;
-                compareCards(firstCard, secondCard, cardImages[i]);
-                console.log(cardImages[i])
+                compareCards(firstCard, secondCard);
             }
         });
     }

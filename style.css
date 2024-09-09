@@ -1,8 +1,8 @@
 body{
     background-color:teal;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     margin-top: 1vh;
 }
@@ -11,15 +11,20 @@ body{
     margin-top: 30vh;
 }
 .game-board{
+    transform: translate(10%, 20%);
     border-radius: 30px;
     background-color:#232323;
-    width: 89vh;
-    height: 85vh;
+    width: 50vw;
 
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
+}
+
+.level2-board{
+    transform: translate(0%, 2%);
+    width: 60vw;
 }
 
 .cardBack, .cardFront{
@@ -64,8 +69,8 @@ body{
 .card-container {
     position: relative;
     width: 15vh;
-    height: 22vh;
-    margin: 20px;
+    height: 20vh;
+    margin: 1.5vw;
 }
 
 .card-container.disabled {
@@ -129,6 +134,10 @@ h1, #timer{
     color: #E41A24;
 
     cursor: pointer;
+  }
+
+  #nextLevelBtn > a{
+    text-decoration: none;
   }
 
   #winner-img{
