@@ -5,17 +5,26 @@ let firstCard = '';
 let secondCard = '';
 let totalPairs = 0;
 let matchedPairs = 0;
+let win = false;
+
 
 //select the game board
-let gameBoard = document.querySelector('.game-board')
+let gameBoard = document.querySelector('.game-board');
 
 //array of images
-let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png']
+let images = ['duck.png', 'glasses.png', 'coffee.png', 'js.png', 'break.png', 'error.png'];
+
 
 //duplicate the array to create pairs
-let cardImages = images.concat(images)
+let cardImages = images.concat(images);
 
+
+//query selectors
 let winnerScreen = document.querySelector('.winner');
+let losingScreen = document.querySelector('.loser');
+const resetButton = document.querySelector('#resetButton');
+let timerDisplay = document.querySelector('#timer');
+
 
 
 
@@ -37,15 +46,17 @@ let winnerScreen = document.querySelector('.winner');
                 //If all pairs are matched, display a successful message
                 winnerScreen.style.opacity = 1;
                 winnerScreen.style.visibility = "visible";
+
+                //assign win to true
+                win = true
             }
         }
 
+        //function to compare both cards, to check if they match or not
         const compareCards = (firstCard, secondCard) => {
             //Compare firstCard and secondCard
             if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
-                // It's a match!
-                //console.log("IT's A MATCHHHH!!!")
-
+                
                 //increase the number of matchedPairs
                 matchedPairs++;
 
@@ -53,7 +64,7 @@ let winnerScreen = document.querySelector('.winner');
                 resetCards();
 
                 //After every successful match, check if all pairs have been found
-                checkForWin(totalPairs, matchedPairs)
+                checkForWin(totalPairs, matchedPairs);
 
             } else {
                 console.log("cards are not matching");
@@ -68,9 +79,28 @@ let winnerScreen = document.querySelector('.winner');
             }
         }
 
-        //Shuffle the array using sort with a random comparison function
-        cardImages.sort(() => Math.random() - 0.5);
-        console.log(cardImages)
+        //function to countdown to handle losing logic
+        const startTimer = ()=>{
+            let time = 90;
+            const timer = setInterval(() => {
+                time--;
+                timerDisplay.innerHTML = `timer: ${time} seconds`
+                
+                if (time === 0 && totalPairs !== matchedPairs) {
+
+                    win = false;
+                    clearInterval(timer);
+                    // Show losing screen here
+                    losingScreen.style.visibility = "visible";
+                    losingScreen.style.opacity = 1;
+                }
+
+                //disable the timer incase the user wins
+                if(win){
+                    clearInterval(timer);
+                }
+            }, 1000);
+        } 
 
 
 
@@ -78,75 +108,87 @@ let winnerScreen = document.querySelector('.winner');
      ////////////////////////////////
     // Event Listners For Game Logic 
 
-// a loop to spread the cards on the game board
-for (let i = 0; i < cardImages.length; i++) {
+// Initialize or reset the game
+const initializeGame = () => {
+    // Clear existing cards from the game board
+    gameBoard.innerHTML = '';
 
-    //assign the number of pairs to the variable
+    // Shuffle the card images
+    cardImages.sort(() => Math.random() - 0.5);
+
+    // Assign the number of pairs to the variable
     totalPairs = cardImages.length / 2;
 
-    //card container that holds the front/back sides of the card
-    const cardContainer = document.createElement('div');
-    cardContainer.setAttribute('class', 'card-container');
-    gameBoard.appendChild(cardContainer);
+    // Create cards and add them to the game board
+    for (let i = 0; i < cardImages.length; i++) {
+        // Card container that holds the front/back sides of the card
+        const cardContainer = document.createElement('div');
+        cardContainer.setAttribute('class', 'card-container');
+        gameBoard.appendChild(cardContainer);
 
-    // Create the back side of the card (GA logo)
-    const cardBack = document.createElement('div');
-    cardBack.setAttribute('class', 'cardBack');
-    cardContainer.appendChild(cardBack);
+        // Create the back side of the card
+        const cardBack = document.createElement('div');
+        cardBack.setAttribute('class', 'cardBack');
+        cardContainer.appendChild(cardBack);
 
-    const backImage = document.createElement('img');
-    backImage.setAttribute('src', './images/ga.png');
-    backImage.setAttribute('class', 'cardContent');
-    cardBack.appendChild(backImage);
+        const backImage = document.createElement('img');
+        backImage.setAttribute('src', './images/ga.png');
+        backImage.setAttribute('class', 'cardContent');
+        cardBack.appendChild(backImage);
 
+        // Create the front side of the card
+        const cardFront = document.createElement('div');
+        cardFront.setAttribute('class', 'cardFront');
+        cardContainer.appendChild(cardFront);
 
-    // Create the front side of the card (random image)
-    const cardFront = document.createElement('div');
-    cardFront.setAttribute('class', 'cardFront');
-    cardContainer.appendChild(cardFront);
+        const frontImage = document.createElement('img');
+        frontImage.setAttribute('src', `./images/${cardImages[i]}`);
+        frontImage.setAttribute('class', 'cardContent');
+        cardFront.appendChild(frontImage);
 
-    const frontImage = document.createElement('img');
-    frontImage.setAttribute('src', `./images/${cardImages[i]}`);
-    frontImage.setAttribute('class', 'cardContent');
-    cardFront.appendChild(frontImage);
+        // To identify images, use the name of the image
+        cardContainer.setAttribute('data-image', cardImages[i]);
 
-    //to identify images, use the name of the image
-    cardContainer.setAttribute('data-image', cardImages[i]);
+        // Flip on click
+        cardContainer.addEventListener('click', () => {
+            cardContainer.classList.toggle('flipped');
+            let clickedCard = cardContainer;
 
-    // Flip on click
-    cardContainer.addEventListener('click', () => {
+            if (firstCard === '') {
+                firstCard = clickedCard;
+            } else {
+                secondCard = clickedCard;
+                compareCards(firstCard, secondCard);
+            }
+        });
+    }
 
-        
-        //flip the card (toggle the css class)
-        cardContainer.classList.toggle('flipped');
+    // Reset game variables
+    firstCard = '';
+    secondCard = '';
+    matchedPairs = 0;
 
-        //store the whole card
-        let clickedCard = cardContainer;
+    // Hide Winner and Losing Screens
+    winnerScreen.style.opacity = 0;
+    losingScreen.style.opacity = 0;
+    losingScreen.style.visibility = "hidden";
 
-        //If firstCard is not set, set it to the clicked card
-        if (firstCard == ''){
-            //assign the first card
-            firstCard = clickedCard
+    // Restart the timer
+    startTimer();
 
-        }else{
-
-            //If firstCard is set, set secondCard to the clicked card
-            secondCard = clickedCard
-
-            //both cards set, compare them
-            compareCards(firstCard, secondCard)
-        }
-    });
+    // Reset win variable
+    win = false;
 }
 
+//reset the global variables
+resetButton.addEventListener('click', () => {
 
-//Keep score based on the number of moves or time taken
+    //Recall the game function
+    initializeGame();
+})
+
+initializeGame();
 
 
-
-
-//function that randomize the array and resets the game.
-//Reset all variables 
-//or a cancel this function and navigate to the next level
 
 

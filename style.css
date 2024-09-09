@@ -68,14 +68,16 @@ body{
     margin: 20px;
 }
 
-h1{
+h1, #timer{
     font-family: "Pangolin", cursive;
     font-weight: 400;
     font-style: normal;
-    font-size: 6vh;
+    font-size: 5vh;
     color: azure;
 }
-
+#timer{
+    font-size: 3vh;
+}
 /* When flipped, the back hides and the front shows */
 .flipped .cardBack {
     transform: rotateY(180deg);
@@ -86,7 +88,7 @@ h1{
 }
 
 
-.winner {
+.winner, .loser {
     position: absolute;
     padding: 5vh 10vw;
     left: 50%;
@@ -103,15 +105,16 @@ h1{
     transition: all 250ms ease;
   }
 
-  .reset {
+  .reset, .next-level {
     color: #E41A24;
     font-size: 2vw;
     font-family: "Pangolin", cursive;
     font-weight: 400;
     font-style: normal;
   }
+  
 
-  #resetButton{
+  #resetButton, #nextLevelBtn{
     font-size: 1.5vw;
     font-family: "Pangolin", cursive;
     font-weight: 400;
