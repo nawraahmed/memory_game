@@ -34,13 +34,9 @@ let winnerScreen = document.querySelector('.winner');
             console.log(`matched pairs: ${matchedPairs}`)
 
             if(totalPairs === matchedPairs){
+                //If all pairs are matched, display a successful message
                 winnerScreen.style.opacity = 1;
-                console.log("YOU WIN!")
-
-                setTimeout(() => {
-                    winnerScreen.style.opacity = 0;
-                }, 2000);
-
+                winnerScreen.style.visibility = "visible";
             }
         }
 
@@ -48,7 +44,7 @@ let winnerScreen = document.querySelector('.winner');
             //Compare firstCard and secondCard
             if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
                 // It's a match!
-                console.log("IT's A MATCHHHH!!!")
+                //console.log("IT's A MATCHHHH!!!")
 
                 //increase the number of matchedPairs
                 matchedPairs++;
@@ -74,6 +70,7 @@ let winnerScreen = document.querySelector('.winner');
 
         //Shuffle the array using sort with a random comparison function
         cardImages.sort(() => Math.random() - 0.5);
+        console.log(cardImages)
 
 
 
@@ -146,8 +143,6 @@ for (let i = 0; i < cardImages.length; i++) {
 //Keep score based on the number of moves or time taken
 
 
-
-//If all pairs are matched, display a successful message
 
 
 //function that randomize the array and resets the game.
