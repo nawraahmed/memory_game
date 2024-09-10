@@ -60,6 +60,10 @@ let cardImages = images.concat(images);
             //Compare firstCard and secondCard
             if (firstCard.getAttribute('data-image') === secondCard.getAttribute('data-image')) {
                 
+                 //remove the event listners for these cards
+                firstCard.style.pointerEvents = 'none';
+                secondCard.style.pointerEvents = 'none';
+                
                 //increase the number of matchedPairs
                 matchedPairs++;
 
@@ -127,6 +131,19 @@ const initializeGame = () => {
     // Shuffle the card images
     cardImages.sort(() => Math.random() - 0.5);
 
+     //flip all the cards for 3 sec
+     setTimeout(() => {
+        document.querySelectorAll('.card-container').forEach(card => {
+            card.classList.toggle('flipped'); 
+        });
+    }, 3000); // 1 second delay
+    
+    setTimeout(() => {
+        document.querySelectorAll('.card-container').forEach(card => {
+            card.classList.toggle('flipped'); // Ensure they flip back
+        });
+    }, 1000);
+    
     // Assign the number of pairs to the variable
     totalPairs = cardImages.length / 2;
 

@@ -53,7 +53,7 @@ let cardImages = images.concat(images);
         }
 
         //compare both cards, to check if they match or not
-        const compareCards = (firstCard, secondCard, imageToBeDisabled) => {
+        const compareCards = (firstCard, secondCard) => {
 
             // Disable clicking on all cards
             disableCardsClicking('add')
@@ -133,7 +133,18 @@ const initializeGame = () => {
     // Shuffle the card images
     cardImages.sort(() => Math.random() - 0.5);
 
-    console.log(cardImages)
+    //flip all the cards for 3 sec
+    setTimeout(() => {
+        document.querySelectorAll('.card-container').forEach(card => {
+            card.classList.toggle('flipped'); 
+        });
+    }, 3000); // 1 second delay
+    
+    setTimeout(() => {
+        document.querySelectorAll('.card-container').forEach(card => {
+            card.classList.toggle('flipped'); // Ensure they flip back
+        });
+    }, 1000);
 
     // Assign the number of pairs to the variable
     totalPairs = cardImages.length / 2;
@@ -169,6 +180,7 @@ const initializeGame = () => {
         // To identify images, use the name of the image
         cardContainer.setAttribute('data-image', cardImages[i]);
 
+        
         // Flip on click
         cardContainer.addEventListener('click', () => {
             cardContainer.classList.toggle('flipped');
@@ -178,7 +190,7 @@ const initializeGame = () => {
                 firstCard = clickedCard;
             } else {
                 secondCard = clickedCard;
-                compareCards(firstCard, secondCard, cardImages[i]);
+                compareCards(firstCard, secondCard);
                 console.log(cardImages[i])
             }
         });
