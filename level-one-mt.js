@@ -30,8 +30,7 @@ let cardImages = images.concat(images);
 
         //check for a win 
         const checkForWin = (totalPairs, matchedPairs) => {
-            console.log(`total pairs: ${totalPairs}`)
-            console.log(`matched pairs: ${matchedPairs}`)
+           
 
             if(totalPairs === matchedPairs){
                 //If all pairs are matched, display a successful message
@@ -80,7 +79,7 @@ let cardImages = images.concat(images);
                 checkForWin(totalPairs, matchedPairs);
 
             } else {
-                console.log("cards are not matching");
+                
 
                 // If they don’t match: flip both cards back down after 1 sec
                 setTimeout(() => {
@@ -191,7 +190,7 @@ const initializeGame = () => {
             } else {
                 secondCard = clickedCard;
                 compareCards(firstCard, secondCard);
-                console.log(cardImages[i])
+              
             }
         });
     }
