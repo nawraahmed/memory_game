@@ -231,12 +231,10 @@ h1, #timer{
     font-weight: 400;
     font-style: normal;
     text-decoration: none;
-
     background-color: #3719F5;
     border-radius: 6vh;
     padding: 30px;
     color: white;
-
     cursor: pointer;
   }
 
@@ -251,24 +249,25 @@ h1, #timer{
   .themes{
     display: flex;
     justify-content: space-evenly;
-    width: 50vw;
+    width: 90vh;
+
+    padding: 10px;
   }
 
   .theme-btn{
     background-color: #D9D9D9;
     color: #232323;
-
-    font-size: 50px;
+    font-size: 40px;
     font-family: "Londrina Shadow", sans-serif;
-    font-weight: 400;
+    font-weight: 200;
     font-style: normal;
     text-decoration: none;
-
     border-radius: 80px;
     padding: 35px;
 
   }
 
   .theme-btn:hover{
-    border: 10px solid #3719F5;
+    background-color: #3719F5;
+    color: #D9D9D9;
   }
