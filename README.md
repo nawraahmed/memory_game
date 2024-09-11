@@ -10,12 +10,14 @@
 ***
 
 ### ***Description***
-#### I made this game using HTML, CSS, and JavaScript. It's a simple memory game 
+#### I created this memory matching game using HTML, CSS, and JavaScript. It has 2 themes, the first one is about my experiense in General Assembely. The second theme of the game is inspired by magic and tarot cards, where players match different symbols. It features a custom background, a countdown timer, and win/lose screens. The game is designed with multiple levels, starting with an introductory screen that navigates to the first level. Players must match all pairs before time runs out
 
 ***
 ### ***Technologies***
 * Front end and design
     * Figma
+    * illustrator
+    * HTML
     * CSS
 
 * Logic
@@ -28,11 +30,11 @@
   ***
   ### ***Screenshots***
 
-  #### **I will be sharing them later! Stay Tuned!**
-  ![Image](https://i.imgur.com/vIXETnZ.png)
+  #### **The Launching Screen**
+  ![Image](https://imgur.com/a/IhNs25W)
 
-  #### **I will be sharing them later! Stay Tuned!**
-  ![Image](https://i.imgur.com/hdx0Bxt.png)
+  #### **Level One - magic theme!**
+  ![Image](https://imgur.com/soiVvDu)
 
 
 

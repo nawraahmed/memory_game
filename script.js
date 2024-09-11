@@ -1,4 +1,3 @@
-
 ////////////////////////////////
 // Global Variables For Game Logic
 let firstCard = '';

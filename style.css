@@ -236,19 +236,6 @@ h1, #timer{
     object-fit: cover;
   }
 
-  /* #play-btn{
-    font-size: 50px;
-    font-family: "Londrina Shadow", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    text-decoration: none;
-    background-color: #3719F5;
-    border-radius: 6vh;
-    padding: 30px;
-    color: white;
-    cursor: pointer;
-  } */
-
   #game-title{
     font-family: "Londrina Shadow", sans-serif;
     font-weight: 400;
