@@ -31,7 +31,7 @@
   ### ***Screenshots***
 
   #### **The Launching Screen**
-  ![Image](https://imgur.com/a/IhNs25W.png)
+  ![Image](https://imgur.com/VFIRzNI.png)
 
   #### **Level One - magic theme!**
   ![Image](https://imgur.com/soiVvDu.png)
