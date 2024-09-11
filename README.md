@@ -31,10 +31,10 @@
   ### ***Screenshots***
 
   #### **The Launching Screen**
-  ![Image](https://imgur.com/a/IhNs25W)
+  ![Image](https://imgur.com/a/IhNs25W.png)
 
   #### **Level One - magic theme!**
-  ![Image](https://imgur.com/soiVvDu)
+  ![Image](https://imgur.com/soiVvDu.png)
 
 
 
